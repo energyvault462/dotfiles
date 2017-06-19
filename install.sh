@@ -6,10 +6,13 @@ function link_file () {
 		if [ -f "$HOME/.$FILE" ]; then
 			mv "$HOME/.$FILE" "$HOME/.$FILE.old"
 		fi
-		ln -s "$PWD/$FILE" "$HOME/.$FILE"
+		if ! [ -L "$HOME/.$FILE" ]; then
+			ln -s "$PWD/$FILE" "$HOME/.$FILE"
+		fi
 	fi
 }
 
 $(hash git 2>/dev/null) && link_file gitconfig
 $(hash git 2>/dev/null) && link_file bashrc
 $(hash zsh 2>/dev/null) && link_file zshrc
+
