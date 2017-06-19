@@ -1,86 +1,51 @@
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+# This is the base of the new zsh directory
+MYZSH="$HOME/.myzsh"
 
-# Path to your oh-my-zsh installation.
-  export ZSH=~/.oh-my-zsh
+# Specify a tmp directory to use across all modules
+TMPDIR="/tmp"
 
-# Set name of the theme to load. Optionally, if you set this to "random"
-# it'll load a random theme each time that oh-my-zsh is loaded.
-# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-# good ones: superjarin, juanghurtado, bira, rkj
-ZSH_THEME="ys"
+# This is the theme.
+THEME="default"
 
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
+# This is the list of modules that generate Left Primary output.
+LPRIMARY=(pwd git jobs vim)
 
-# Uncomment the following line to use hyphen-insensitive completion. Case
-# sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
+# This is the list of modules that generate Left Secondary output.
+LSECONDARY=(exitcode userhost gettime)
 
-# Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
+# This is the list of modules that generate Right Primary output.
+RPRIMARY=(ipaddr)
 
-# Uncomment the following line to change how often to auto-update (in days).
-# export UPDATE_ZSH_DAYS=13
+# This is the list of modules that generate Right Secondary output.
+if [ "$DOCKER" = "true" ]; then
+	RSECONDARY=(getdate)
+else
+	RSECONDARY=(getdate battery)
+fi
 
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
+# This is the title of the terminal
+TITLE=(pwd)
 
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
+# This is the list of modules that get processed once at shell start.
+# They shouldn't generate output.
+if [ "$DOCKER" = "true" ]; then
+#removed timer, golang, releases
+	EXTRA=(ssh-add localbin completions lesscolors lscolors ll coloncolon longcmd safe-paste grepcolors history)
+else
+#       removed docker, timer, golang, releases
+	EXTRA=(ssh-add localbin completions lesscolors lscolors ll coloncolon longcmd safe-paste grepcolors tmux alwaystmux history)
+fi
 
-# Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
+if [ "$DOCKER" = "true" ]; then
+	PR_PRIMARY='$PR_BLUE'
+else
+	PR_PRIMARY='$PR_GREEN'
+fi
 
-# Uncomment the following line to display red dots whilst waiting for completion.
-# COMPLETION_WAITING_DOTS="true"
-
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# HIST_STAMPS="mm/dd/yyyy"
-
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
-
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(git rvm)
-
-source $ZSH/oh-my-zsh.sh
-
-# User configuration
-
-# export MANPATH="/usr/local/man:$MANPATH"
-
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# ssh
-# export SSH_KEY_PATH="~/.ssh/rsa_id"
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
+################################################################################
+# This kicks off our processing now that we have variables
+BATT_METER="0"
+BATT_PCT="1"
+BATT_TIME="1"
+GIT_USE_ICONS="1"
+source "$MYZSH/init"
