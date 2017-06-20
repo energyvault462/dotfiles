@@ -7,7 +7,7 @@ function link_file () {
 			mv "$HOME/.$FILE" "$HOME/.$FILE.old"
 		fi
 		if ! [ -L "$HOME/.$FILE" ]; then
-			ln -s "$PWD/$FILE" "$HOME/.$FILE"
+			ln -s "$HOME/dotfiles/$FILE" "$HOME/.$FILE"
 		fi
 	fi
 }
