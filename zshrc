@@ -42,10 +42,6 @@ else
 	PR_PRIMARY='$PR_GREEN'
 fi
 
-if [[ -r /usr/local/lib/python2.7/dist-packages/powerline/bindings/zsh/powerline.zsh ]]; then
-    source /usr/local/lib/python2.7/dist-packages/powerline/bindings/zsh/powerline.zsh
-fi
-
 ################################################################################
 # This kicks off our processing now that we have variables
 BATT_METER="0"
