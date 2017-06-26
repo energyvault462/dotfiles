@@ -14,7 +14,8 @@ function link_file () {
 
 $(hash git 2>/dev/null) && link_file gitconfig
 $(hash git 2>/dev/null) && link_file bashrc
-$(hash zsh 2>/dev/null) && link_file zprofile && link_file zshrc
+$(hash zsh 2>/dev/null) && link_file zprofile 
+$(hash zsh 2>/dev/null) && link_file zshrc
 $(hash zsh 2>/dev/null) && link_file tmux.conf
 
 
