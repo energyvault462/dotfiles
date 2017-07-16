@@ -24,3 +24,6 @@ export PATH="$PATH:$GOBINPATH"
 #export PATH="$PATH:$RUST_PATH"
 
 # vim: filetype=exports noexpandtab
+
+
+source $HOME/.ssh/env-var
